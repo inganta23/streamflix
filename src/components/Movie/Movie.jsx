@@ -15,11 +15,17 @@ const Movie = (props) => {
   const { movies } = useSelector((state) => state.purchasedMovies);
   const { saldo } = useSelector((state) => state.saldo);
   const price = setPricing(props.data.vote_average);
+  const str = props.data.title;
+  const slug = str.replace(/\s+/g, "-").toLowerCase();
 
   const handleBuyMovie = () => {
-    if (saldo < price) return;
+    if (saldo < price) {
+      props.notify("Saldo Tidak Cukup", true);
+      return;
+    }
     dispatch(decrementByAmount(price));
     dispatch(addMovie(props.data.id));
+    props.notify("Pembelian Sukses");
   };
 
   return (
@@ -37,7 +43,7 @@ const Movie = (props) => {
           currentTarget.src =
             "https://images.unsplash.com/photo-1662675117392-561a414fcefc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80";
         }}
-        onClick={() => navigate(`/${props.data.id}`)}
+        onClick={() => navigate(`/${props.data.id}-${slug}`)}
       />
       <div className="p-2.5 space-y-1">
         <div className="flex gap-1 items-center">
@@ -58,8 +64,8 @@ const Movie = (props) => {
             Rp {currencyFormatter(price)}
           </p>
           {movies[props.data.id] ? (
-            <button className="px-3 font-semibold text-black border-b-4 rounded shadow-lg bg-gray-100 border-gray-200 shadow-gray-100/50">
-              Purchased
+            <button className="px-1 font-semibold text-black border-b-4 rounded shadow-lg bg-gray-100 border-gray-200 shadow-gray-100/50">
+              Sudah Dibeli
             </button>
           ) : (
             <button

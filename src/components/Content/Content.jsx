@@ -1,14 +1,14 @@
 import React from "react";
 import MovieStrip from "../MovieStrip/MovieStrip";
-import { BiTrendingUp } from "react-icons/bi";
+import { MdLocalMovies } from "react-icons/md";
 
 const Content = () => {
   return (
-    <div className="bg-dark-gray mt-3 mb-8 w-full">
+    <div className="bg-dark-gray mb-8 ml-40 w-full">
       <MovieStrip
-        name="Popular"
-        icon={<BiTrendingUp size={20} color="#F21B3F" />}
-        request={`/discover/movie?language=en-US&include_adult=false&sort_by=popularity.desc`}
+        name="Movies"
+        icon={<MdLocalMovies size={20} color="#F21B3F" />}
+        request={`/discover/movie?language=en-US&include_adult=false`}
       />
     </div>
   );

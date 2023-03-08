@@ -14,7 +14,6 @@ import { currencyFormatter } from "../utils/currencyFormatter";
 const Detail = () => {
   const [movie, setMovie] = useState([]);
   const [genres, setGenres] = useState();
-  const [cast, setCast] = useState();
   const [runtime, setRuntime] = useState(0);
   const [watchProviders, setWatchProviders] = useState([]);
   const { movieId } = useParams();
@@ -94,7 +93,12 @@ const Detail = () => {
 
   return (
     <motion.div className="h-auto m-28">
-      <button onClick={() => navigate(-1)}>Back</button>
+      <button
+        className="px-4 py-1 font-semibold text-white border-b-4 rounded shadow-lg bg-red-500 border-red-800 shadow-red-600/50 hover:bg-red-600 cursor-pointer z-10"
+        onClick={() => navigate(-1)}
+      >
+        Kembali
+      </button>
       <div className="w-fit mx-auto px-8 py-16 flex flex-col items-center justify-center bg-neutral-800 rounded-xl drop-shadow-2xl">
         <div
           className="relative flex-shrink-0 cursor-pointer"
@@ -126,7 +130,7 @@ const Detail = () => {
             </p>
             {movies[movieId] ? (
               <button className="px-3 font-semibold text-black border-b-4 rounded shadow-lg bg-gray-100 border-gray-200 shadow-gray-100/50">
-                Purchased
+                Sudah Dibeli
               </button>
             ) : (
               <button
