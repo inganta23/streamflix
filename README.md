@@ -1,4 +1,4 @@
-# streamflix
+# Streamflix
 Streamflix dibuat dengan menggunakan Vite, React dan Redux.  
 Api movies diambil dari tMDB API. Saya menggunakan metode API Read Access Token (v4 auth).  
 Jadi auth ini akan disematkan pada header Authorization yang kemudian digunakan untuk mengakses seluruh tMDB endpoint.  
