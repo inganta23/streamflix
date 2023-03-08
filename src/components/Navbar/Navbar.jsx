@@ -57,7 +57,7 @@ const Navbar = () => {
         </div>
         <div className="flex gap-4 mr-4">
           <Link
-            to="/cart"
+            to="/cart?page=1"
             className="px-3 py-2 font-semibold text-white border-b-4 rounded shadow-lg bg-blue-500 border-blue-800 shadow-blue-600/50 hover:bg-blue-600 cursor-pointer flex gap-2"
           >
             <FaOpencart size={25} />

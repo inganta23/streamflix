@@ -15,8 +15,8 @@ export const purchasedMoviesSlice = createSlice({
       state.movies[action.payload] = 1;
     },
     removeMovie: (state, action) => {
-      if (state.movies.length < 1) return;
-      console.log(state.action.payload);
+      if (!state.movies[action.payload]) return;
+      delete state.movies[action.payload];
     },
   },
 });

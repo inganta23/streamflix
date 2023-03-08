@@ -10,7 +10,6 @@ export const saldoSlice = createSlice({
   reducers: {
     decrementByAmount: (state, action) => {
       if (state.saldo < action.payload) return;
-      console.log(action.payload);
       state.saldo -= action.payload;
     },
     incrementByAmount: (state, action) => {

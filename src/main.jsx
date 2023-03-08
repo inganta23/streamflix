@@ -8,6 +8,7 @@ import Home from "./routes/Home";
 import Detail from "./routes/Detail";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import Cart from "./routes/CartList";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/:movieId",
         element: <Detail />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
