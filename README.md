@@ -10,7 +10,7 @@ Untuk memulai silahkan clone repo ini kemudian masuk ke folder ``streamflix``.
 - Setelah selesai klik link url yang muncul (secara default adalah ``http://127.0.0.1:5173/``)
 - Program bisa dijalankan
 
-Saya juga sudah mendeploy website dengan link : ``https://streamflix.up.railway.app/``
+Saya juga sudah mendeploy website dengan link : https://streamflix.up.railway.app/
 Deployment dilakukan menggunakan Railway.
 
 Terimakasih 
