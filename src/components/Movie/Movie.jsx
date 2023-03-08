@@ -9,7 +9,7 @@ import { addMovie } from "../../redux/purchasedMovies/purchasedMoviesSlice";
 import { currencyFormatter } from "../../utils/currencyFormatter";
 
 const Movie = (props) => {
-  const year = props.data.release_date.split("-");
+  const year = props.data?.release_date?.split("-");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.purchasedMovies);
