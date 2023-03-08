@@ -4,9 +4,9 @@ import purchasedMoviesReducer from "./purchasedMovies/purchasedMoviesSlice";
 import genreReducer from "./genre/genreSlice";
 
 export const store = configureStore({
-  reducer: {
-    saldo: saldoReducer,
-    purchasedMovies: purchasedMoviesReducer,
-    genre: genreReducer,
-  },
+    reducer: {
+        saldo: saldoReducer,
+        purchasedMovies: purchasedMoviesReducer,
+        genre: genreReducer,
+    },
 });
