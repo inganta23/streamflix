@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiFillStar, AiOutlinePlayCircle } from "react-icons/ai";
-import { IoMdClose } from "react-icons/io";
-import { TbRotate360 } from "react-icons/tb";
-import { motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 import MovieProvider from "../components/MovieProvider/MovieProvider";
+import { useDispatch, useSelector } from "react-redux";
 import API from "../services/API";
+import { useNavigate } from "react-router-dom";
+import { setPricing } from "../utils/pricing";
+import { decrementByAmount } from "../redux/saldo/saldoSlice";
+import { addMovie } from "../redux/purchasedMovies/purchasedMoviesSlice";
+import { currencyFormatter } from "../utils/currencyFormatter";
 
 const Detail = () => {
   const [movie, setMovie] = useState([]);
@@ -14,7 +18,11 @@ const Detail = () => {
   const [runtime, setRuntime] = useState(0);
   const [watchProviders, setWatchProviders] = useState([]);
   const { movieId } = useParams();
-  const controls = useAnimationControls();
+  const navigate = useNavigate();
+  const { saldo } = useSelector((state) => state.saldo);
+  const { movies } = useSelector((state) => state.purchasedMovies);
+
+  const dispatch = useDispatch();
 
   const getMovieDetails = async () => {
     try {
@@ -71,14 +79,22 @@ const Detail = () => {
     });
   };
 
+  const price = setPricing(movie.vote_average);
+
+  const handleBuyMovie = () => {
+    if (saldo < price) return;
+    dispatch(decrementByAmount(price));
+    dispatch(addMovie(movie.id));
+  };
+
   useEffect(() => {
     getMovieDetails();
     getWatchProviders();
   }, []);
-  //bg-neutral-800 rounded-xl text-neutral-100 w-[700px] h-96 drop-shadow-2xl mx-auto
 
   return (
     <motion.div className="h-auto m-28">
+      <button onClick={() => navigate(-1)}>Back</button>
       <div className="w-fit mx-auto px-8 py-16 flex flex-col items-center justify-center bg-neutral-800 rounded-xl drop-shadow-2xl">
         <div
           className="relative flex-shrink-0 cursor-pointer"
@@ -99,10 +115,29 @@ const Detail = () => {
           <div className="flex items-center gap-1">
             <AiFillStar size="14" color="#EAB308" />
             <h4 className="text-sm text-neutral-500">
-              {movie.vote_average} • {movie.vote_count} votes •{" "}
+              {movie.vote_average} • {movie.vote_count} votes •
               {movie.release_date}
             </h4>
           </div>
+
+          <div className="flex items-center gap-6">
+            <p className="text-neutral-100 text-lg">
+              Rp {currencyFormatter(price)}
+            </p>
+            {movies[movieId] ? (
+              <button className="px-3 font-semibold text-black border-b-4 rounded shadow-lg bg-gray-100 border-gray-200 shadow-gray-100/50">
+                Purchased
+              </button>
+            ) : (
+              <button
+                className="px-3 font-semibold text-white border-b-4 rounded shadow-lg bg-green-500 border-green-800 shadow-green-600/50 hover:bg-green-600 cursor-pointer z-10"
+                onClick={handleBuyMovie}
+              >
+                Beli
+              </button>
+            )}
+          </div>
+
           <div className="space-y-2 text-base">
             <h4 className="text-neutral-300 line-clamp-5">
               <strong>Overview: </strong>

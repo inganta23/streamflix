@@ -7,7 +7,6 @@ import { useSearchParams } from "react-router-dom";
 
 const MovieStrip = (props) => {
   const [isEnabled, setIsEnabled] = useState(false);
-  // const { height, width } = useWindowDimensions();
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -74,7 +73,7 @@ const MovieStrip = (props) => {
             <p>{props.name}</p>
           </div>
           <div className="relative">
-            <div className="flex gap-3 flex-wrap justify-center">
+            <div className="flex gap-3 flex-wrap justify-center overflow-hidden px-8">
               {movieSection}
             </div>
             <motion.div
